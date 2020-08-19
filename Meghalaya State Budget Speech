@@ -1,0 +1,26 @@
+
+## install.packages as and if required
+
+library(rvest)
+library(httr)
+library(dplyr)
+library(purrr)
+
+## Change to Directory where downloaded files need to be saved
+setwd("XXX")
+
+url <- "http://megassembly.gov.in/budget_speech/index.htm"
+download_url <- "http://megassembly.gov.in/budget_speech/"
+
+webpage <- read_html(url)
+
+download_speech <- webpage %>%
+                   html_nodes(xpath = "//a") %>%
+                   html_attr(name ="href") 
+
+file_link <- paste0(download_url,download_speech[])
+
+for (i in 1:49) {
+                download.file(file_link,destfile = paste0("Meghalaya_",download_speech[i]),method = 'auto',mode = 'w',
+                cacheOK = TRUE, extra = getOption("download.file.extra"))
+}
